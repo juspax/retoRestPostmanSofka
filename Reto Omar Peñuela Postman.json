@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "a4109168-0972-4fce-a18b-c05307161836",
+		"name": "Reto Omar Peñuela Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16886010",
+		"_collection_link": "https://crimson-sunset-432585.postman.co/workspace/Ejemplos~f85b87bb-9259-4eac-a782-cd9ae17de7da/collection/16886010-a4109168-0972-4fce-a18b-c05307161836?action=share&source=collection_link&creator=16886010"
+	},
+	"item": [
+		{
+			"name": "PostCrearMascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Evaluar que el status sea 200\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 114,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Raza Tabbit Americno\"\r\n  },\r\n  \"name\": \"Gato Historico\",\r\n  \"photoUrls\": [\r\n    \"https://petstore.swagger.io/v2/pet/11/uploadImage\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"Orion\"\r\n    }\r\n  ],\r\n  \"status\": \"Activo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlmascotas}}",
+					"host": [
+						"{{urlmascotas}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetConsultaMascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\", function (){\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData['category'].name).to.eql(\"Raza Tabbit Americno\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\",function (){\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData['name']).to.eql(\"Gato Historico\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\",function (){\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData['photoUrls'][0]).to.eql(\"https://petstore.swagger.io/v2/pet/11/uploadImage\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\",function (){\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData['tags'][0].name).to.eql(\"Orion\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\",function (){\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData['status']).to.eql(\"Activo\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlmascotas}}/114",
+					"host": [
+						"{{urlmascotas}}"
+					],
+					"path": [
+						"114"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutModificarMascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API Response OK\", function (){\r",
+							"    pm.response.to.have.status('OK');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Compruebe mascota\", function (){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData['tags'][0].name).to.eql(\"Orion3\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 114,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Raza Tabbit Americno\"\r\n  },\r\n  \"name\": \"Gato Historico\",\r\n  \"photoUrls\": [\r\n    \"https://petstore.swagger.io/v2/pet/11/uploadImage\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 1,\r\n      \"name\": \"Orion3\"\r\n    }\r\n  ],\r\n  \"status\": \"Activo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlmascotas}}",
+					"host": [
+						"{{urlmascotas}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEliminarMascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar el Status 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{urlmascotas}}/114",
+					"host": [
+						"{{urlmascotas}}"
+					],
+					"path": [
+						"114"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
